@@ -1,0 +1,34 @@
+#control_bar {
+    position: sticky;
+    top: 0;
+    overflow: hidden;
+    background-color: #333;
+    z-index: 2;
+}
+  
+#control_bar button {
+    float: left;
+    display: block;
+    color: #ffffff;
+    background-color: #000000;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+    transition-duration: 0.2s;
+}
+
+#control_bar button:hover {
+    background-color: #818181;
+    transition-duration: 0.2s;
+}
+
+#control_bar input {
+    float: left;
+    display: block;
+    color: #ffffff;
+    background-color: #000000;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+}
+ 
