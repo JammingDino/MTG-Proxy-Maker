@@ -8,16 +8,28 @@
 </head>
 <body>
 
-    <div id="control_bar">
-        <input type="text" id="textBox" placeholder="Enter card name ... "></input>
+    <div class="control-bar">
+        <input type="text" id="text-box" placeholder="Enter card name ... "></input>
         <button onclick="sendText()">Search for Card</button>
         <button>Continue</button>
         <button>Back</button>
     </div>
 
-    
-
-    <div id="imageContainer"></div>
+    <div class="card-container">
+        <div class="card-image-frame">
+            <img class="card-image" src="https://cards.scryfall.io/normal/front/5/8/5852f528-92aa-45cf-8436-5774691676d3.jpg?1562913435">
+        </div>
+        <div class="card-information">
+            <h1 class="card-name">
+                <span class="card-text-card-name">Bogardan Hellkite</span>
+                <span class="card-text-mana-cost">6{R}{R}</span>
+            </h1>
+            <p class="card-text-type-line">Creature — Dragon</p>
+            <dive class="card-text-oracle">Flash\nFlying\nWhen this creature enters, it deals 5 damage divided as you choose among any number of targets.</div>
+            <div class="card-text-stats">5/5</div>
+            <p class="card-text-artist">Illustrated by Scott M. Fischer</p>
+        </div>
+    </div>
 
     <script src="/eel.js"></script>
     <script src="script.js"></script>
