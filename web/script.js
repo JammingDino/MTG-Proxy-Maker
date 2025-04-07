@@ -52,24 +52,6 @@ async function addCard(cardInformation) {
         stats.textContent      = cardInformation.stats;
         artist.textContent     = cardInformation.artist;
 
-        // // Add the mousemove event to the frame for interactive tilt
-        // frame.addEventListener("mousemove", function(event) {
-        //     const bounds = frame.getBoundingClientRect(); // Get the size and position of the frame
-        //     const offsetX = event.clientX - bounds.left; // Mouse X position relative to the frame
-        //     const offsetY = event.clientY - bounds.top;  // Mouse Y position relative to the frame
-
-        //     // Normalize the mouse position to be between -1 and 1 (relative to frame size)
-        //     const xRotation = ((offsetY / bounds.height) - 0.5) * 10;  // Tilt on the X axis (subtle)
-        //     const yRotation = ((offsetX / bounds.width) - 0.5) * -10; // Tilt on the Y axis (subtle)
-
-        //     // Apply the tilt to the image inside the frame
-        //     img.style.transform = `rotateX(${xRotation}deg) rotateY(${yRotation}deg)`;
-        // });
-
-        // frame.addEventListener("mouseout", function() {
-        //     img.style.transform = "rotateX(0deg) rotateY(0deg)";
-        // });
-
     } catch (error) {
         eel.js_print(error);
     }
@@ -113,3 +95,8 @@ function showPopupMessage(message) {
         popup.remove();
     }, 3000);
 }
+
+window.onload = async function() {
+    let random_card_name = await eel.random_card_name()();
+    eel.load_specific_card(random_card_name);
+};
