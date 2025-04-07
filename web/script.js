@@ -1,5 +1,4 @@
 eel.expose(change_class_text)
-
 function change_class_text(element_class, text) {
     let element = document.getElementsByClassName(element_class)[0];
 
@@ -21,40 +20,38 @@ function change_class_text(element_class, text) {
     }
 }
 
+eel.expose(addButtonToElement)
+function addButtonToElement(element_class, button_text, index) {
+
+    eel.js_print(button_text)
+
+    let element = document.getElementsByClassName(element_class)[0];
+    if (!element) {
+        console.error(`Element with class "${element_class}" not found.`);
+        return;
+    }
+
+    let button = document.createElement('button');
+    button.textContent = button_text;
+    button.dataset.index = index;
+    button.classList.add("set-button");
+
+    button.addEventListener('click', function() {
+        handleButtonClick(parseInt(this.dataset.index));
+    });
+
+    element.appendChild(button);
+}
+
+function handleButtonClick(index) {
+    eel.set_changed(index);
+}
 
 eel.expose(change_class_image)
 function change_class_image(element_class, src) {
     let element = document.getElementsByClassName(element_class)[0];
     element.src = src
     element.alt = src
-}
-
-async function addCard(cardInformation) {
-
-    try {
-        // Specify the image path (change this to your actual image) 
-        eel.js_print(cardInformation);
-
-        // Create a new div element for the frame
-        let frame        = document.getElementsByClassName("card-image-frame")[0];
-        let img          = document.getElementsByClassName("card-image")[0];
-        let name         = document.getElementsByClassName("card-text-card-name")[0];
-        let mana_value   = document.getElementsByClassName("card-text-mana-cost")[0];
-        let type_line    = document.getElementsByClassName("card-text-type-line")[0];
-
-        let stats        = document.getElementsByClassName("card-text-stats")[0];
-        let artist       = document.getElementsByClassName("card-text-artist")[0];
-
-        img.src                = cardInformation.image;
-        name.textContent       = cardInformation.name;
-        mana_value.textContent = cardInformation.mana_cost;
-        type_line.textContent  = cardInformation.type_line
-        stats.textContent      = cardInformation.stats;
-        artist.textContent     = cardInformation.artist;
-
-    } catch (error) {
-        eel.js_print(error);
-    }
 }
 
 async function sendText() {
@@ -64,15 +61,6 @@ async function sendText() {
         return;
     } else {
         eel.load_specific_card(text);
-        // let cardInformation = await eel.find_specific_card(text)();
-
-        // if (cardInformation === false) {
-        //     showPopupMessage("The card you entered does not exist!");
-        //     return
-        // }
-        
-        // eel.js_print(cardInformation);
-        // addCard(cardInformation);
     }
 }
 

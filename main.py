@@ -19,11 +19,31 @@ def random_card_name() -> str:
     return card.name()
 
 @eel.expose
-def load_specific_card(card : str = "island") -> str:
+def set_changed(index):
+    global current_card_information
+    global current_card_set_information
+    current_card_information = current_card_set_information['data'][index]
+    load_specific_card("", True)
+
+@eel.expose
+def load_specific_card(card : str = "island", change_set : bool = False) -> str:
     global current_card_information
     global current_card_set_information
     try:
-        card_information = scrython.cards.Named(fuzzy=card).scryfallJson
+        if change_set:
+            card_information = current_card_information
+            set_information = current_card_set_information
+        else:
+            card_information = scrython.cards.Named(fuzzy=card).scryfallJson
+            set_information = requests.get(card_information["prints_search_uri"]).content
+            set_information = json.loads(set_information)
+
+            eel.change_class_text("card-versions", "")
+            for i in range(len(set_information['data'])):
+                eel.addButtonToElement("card-versions", set_information['data'][i]['set_name'], i)
+
+            current_card_information = card_information
+            current_card_set_information = set_information
 
         eel.change_class_text("card-text-card-name", card_information["name"])
         eel.change_class_image("card-image", card_information['image_uris']['normal'])
@@ -38,19 +58,6 @@ def load_specific_card(card : str = "island") -> str:
             eel.change_class_text("card-text-stats", card_information["loyalty"])
         else:
             eel.change_class_text("card-text-stats", "")
-
-
-        set_information = requests.get(card_information["prints_search_uri"]).content
-        set_information = json.loads(set_information)
-
-        set_text = ""
-        for i in set_information['data']:
-            set_text += f"{i['set_name']}\n"
-
-        eel.change_class_text("card-versions", set_text)
-
-        current_card_information = card_information
-        current_card_set_information = set_information
 
         return card_information
     except Exception as e:    

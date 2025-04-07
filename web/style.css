@@ -35,3 +35,7 @@ body {
     border-radius: 20px;
     max-width: 500px;
 }
+
+.set-button {
+    width: 100%;
+}
