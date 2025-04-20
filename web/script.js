@@ -54,6 +54,10 @@ function change_class_image(element_class, src) {
     element.alt = src
 }
 
+async function continueWithCardSelected() {
+    await eel.continue_with_card_selected();
+}
+
 async function sendText() {
     let text = document.getElementById("text-box").value;
     if (text.trim() === "") {

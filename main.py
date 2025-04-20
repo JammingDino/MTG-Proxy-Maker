@@ -26,6 +26,28 @@ def set_changed(index):
     load_specific_card("", True)
 
 @eel.expose
+def continue_with_card_selected():
+    global current_card_information
+    global current_card_set_information
+
+    reset_card_information()
+
+    eel.change_class_text("card-versions", "Presets: ")
+    eel.addButtonToElement("card-versions", "Expanded Fullart")
+
+def reset_card_information():
+
+    eel.change_class_text("card-text-card-name", "")
+    eel.change_class_text("card-text-mana-cost", "")
+    eel.change_class_text("card-text-type-line", "")
+    eel.change_class_text("card-text-artist", "")
+    eel.change_class_text("card-text-oracle", "")
+    eel.change_class_text("card-text-stats", "")
+
+    eel.change_class_text("card-versions", "")
+
+
+@eel.expose
 def load_specific_card(card : str = "island", change_set : bool = False) -> str:
     global current_card_information
     global current_card_set_information
